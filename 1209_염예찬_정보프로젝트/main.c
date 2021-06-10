@@ -3,23 +3,10 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib");
+
 #define Tree_Bottom_Y 19 //장애물의 y축방향으로 최대 위치를 치환한다
 #define Tree_Bottom_X 90 //장애물의 x축방향으로 최대 위치를 치환한다
 #define Dino_Bottom_Y 12 //공룡의 y축방향으로 최대 위치를 치환한다
-
-void playIngameSound(void) {
-
-}
-
-void playDeathSound(void) {
-
-}
-
-void stopSound(void) {
-
-}
 
 int getKey(void) { // 키가 눌렸음을 감지했을때 어느 키가 눌렸는지 확인하는 함수이다
     int pressedkey = _getch();
@@ -35,7 +22,7 @@ void Clear(void) { //system("cls")를 매번 쓰기 귀찮아서 Clear()이라는 새로운 함�
     system("cls");
 }
 
-void CursorView(char show) {
+void CursorView(char show) { 
     HANDLE hConsole;
     CONSOLE_CURSOR_INFO ConsoleCursor;
 
@@ -86,6 +73,25 @@ void printDino(int dinoY) { //공룡을 콘솔창에서 출력하는 함수이다
         flag = 1;
     }
 
+}
+
+void printJumpingDino(int dinoY) { //공룡을 콘솔창에서 출력하는 함수이다
+
+    gotoxy(0, dinoY);
+
+    printf("        $$$$$$$ \n");
+    printf("       $$ $$$$$$\n");
+    printf("       $$$$$$$$$\n");
+    printf("$      $$$      \n");
+    printf("$$     $$$$$$$  \n");
+    printf("$$$   $$$$$     \n");
+    printf(" $$  $$$$$$$$$$ \n");
+    printf(" $$$$$$$$$$$    \n");
+    printf("  $$$$$$$$$$    \n");
+    printf("    $$$$$$$$    \n");
+    printf("     $$$$$$     \n");
+    printf("     $    $$$    \n");
+    printf("     $$          ");
 }
 
 void printTreeType1(int treex) { //첫번째 타입의 함수를 출력하는 함수입니다
@@ -226,8 +232,8 @@ START:  //게임이 끝나고 x키를 눌렀을 때 이쪽으로 다시 오게 만든다
 
 
         else if (isatBottom == 0) {
-            for (int i = 1; i <= 5; i++) {
-                printDino(dinoy - 5);
+            for (int i = 1; i <= 6; i++) {
+                printJumpingDino(dinoy - i);
 
                 if (treeTypeRNG == 1) {
                     printTreeType1(treex);
@@ -250,8 +256,8 @@ START:  //게임이 끝나고 x키를 눌렀을 때 이쪽으로 다시 오게 만든다
                 Clear();
 
             }
-            for (int i = 4; i >= 1; i--) {
-                printDino(dinoy - i);
+            for (int i = 5; i >= 1; i--) {
+                printJumpingDino(dinoy - i);
 
                 if (treeTypeRNG == 1) {
                     printTreeType1(treex);
